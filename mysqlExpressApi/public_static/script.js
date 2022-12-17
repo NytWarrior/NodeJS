@@ -1,5 +1,7 @@
 
+
 $(function () {
+
     let inp_name = $('#name')
     let inp_age = $('#age')
     let inp_city = $('#city')
@@ -31,7 +33,17 @@ $(function () {
     })
 
     btn_submit.click(function () {
-        console.log('button clicked')
+        $.post('/api/persons',
+            {
+                name: inp_name.val(),
+                age: inp_age.val(),
+                city: inp_city.val()
+            },
+            function (data) {
+                refreshPersonTable(data)
+            }
+        )
+
     })
 
 })

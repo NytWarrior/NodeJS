@@ -1,23 +1,27 @@
 const route = require('express').Router()
-//this route is on the "/api/" path
+// This route is on the "/api/" path
 
 const db = require('../db')
 
+
 route.get('/persons/', (req, res) => {
-    //send all the persons as an array here
+    //Send all the persons as an array here
 
     db.getAllPersons()
         .then((persons) => res.send(persons))
         .catch((err) => res.send({ error: err }))
+
 })
 
 route.post('/persons/', (req, res) => {
-    //Add the new person(details are in body)
+    //Add the new person (details are in body)
 
     db.addNewPerson(req.body.name, req.body.age, req.body.city)
-        .then(() => res.redirect('/api/')) //redirect to get all persons data
+        .then(() => res.redirect('/api/persons/')) //Redirect to get all persons data
         .catch((err) => res.send({ error: err }))
+
 })
+
 
 exports = module.exports = {
     route
