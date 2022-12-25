@@ -13,6 +13,14 @@ io.on('connection', (socket) => {
         socket.join(data.username)
         socket.emit('logged_in')
     })
+
+    socket.on('msg_send', (data) => {
+        if (data.to) {
+            io.to(data.to).emit('msg_reci', data)
+        } else {
+            socket.broadcast.emit('msg_reci', data)
+        }
+    })
 })
 
 app.use('/', express.static(__dirname + '/public'))

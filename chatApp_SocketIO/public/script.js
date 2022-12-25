@@ -22,3 +22,7 @@ $('#btnSendMsg').click(() => {
         msg: $('#inpNewMsg').val()
     })
 })
+
+socket.on('msg_reci', (data) => {
+    $('#ulMsgList').append($('<li>').text(data.msg))
+})
