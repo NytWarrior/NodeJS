@@ -9,8 +9,9 @@ const io = socketio(server)
 io.on('connection', (socket) => {
     console.log('Connection with socket id: ', socket.id)
 
-    socket.on('msg_send', (data) => {
-        io.emit('msg_reci', data)
+    socket.on('login', (data) => {
+        socket.join(data.username)
+        socket.emit('logged_in')
     })
 })
 
